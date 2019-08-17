@@ -6,8 +6,9 @@ public class Items {
     private int availQuant;
     private String offer;
     private final String category;
+    private int merID;
 
-    Items(String iName, float price, int availQuant, String category) {
+    Items(String iName, float price, int availQuant, String category, int merID) {
         setiUID += 1;
         this.iUID = setiUID;
         this.iName = iName;
@@ -15,6 +16,7 @@ public class Items {
         this.availQuant = availQuant;
         this.category = category;
         this.offer = "";
+        this.merID = merID;
     }
 
     public void setOffer(String offer) {
@@ -43,6 +45,10 @@ public class Items {
 
     public void setAvailQuant(int availQuant) {
         this.availQuant = availQuant;
+    }
+
+    public int getMerID() {
+        return merID;
     }
 
     @Override

@@ -11,6 +11,11 @@ public class Customer {
     private float rewardAccount;
     private int nofOrders;
 
+    private ArrayList<Integer> itmC = new ArrayList<>();
+    private ArrayList<Integer> itmQ = new ArrayList<>();
+    ArrayList<Items> items = Merchant.getItems();
+    ArrayList<String> cat = Merchant.getCat();
+
     // Functions
 
     Scanner sc = new Scanner(System.in);
@@ -26,8 +31,7 @@ public class Customer {
     }
 
     public  void search(){
-        ArrayList<Items> items = Merchant.getItems();
-        ArrayList<String> cat = Merchant.getCat();
+
 
         for (String a: cat) {
             System.out.println(a);
@@ -76,18 +80,25 @@ public class Customer {
                     a.setAvailQuant(a.getAvailQuant() - d);
 
                     float pr = (a.getPrice() * d)*(float)((1/2)/100);
-                    // Incomplete
+                    for (Merchant k: Main.mer) {
+                        if(k.getmID() == a.getMerID()){
+                            k.setContribution(k.getContribution()+pr);
+                        }
+                    }
 
                     Main.account_balance += (a.getPrice() * d)*(float)((1)/100);
                     this.nofOrders += 1;
 
                     this.rewardAccount += (this.nofOrders / 5)*10;
+
+                    break;
                 }
             }
         }
 
         else if(y == 2){
-
+            itmC.add(c);
+            itmQ.add(d);
         }
     }
 
@@ -111,6 +122,46 @@ public class Customer {
 
             else if(query2 == 2){
 
+                label:
+
+                for (int i = 0; i < this.itmQ.size(); i++) {
+
+                    for (Items a : items) {
+                        if (a.getiUID() == this.itmC.get(i)) {
+                            if (a.getAvailQuant() < this.itmQ.get(i)) {
+                                System.out.println("Error: Quantity greater than available");
+                                break label;
+                            }
+                            if (a.getPrice() * this.itmQ.get(i) > this.pAccount + this.rewardAccount) {
+                                System.out.println("Error: Not enough funds available");
+                                break label;
+                            }
+
+                            float temp = this.pAccount - a.getPrice() * this.itmQ.get(i);
+                            if (temp >= 0) {
+                                this.pAccount -= a.getPrice() * this.itmQ.get(i);
+                            } else {
+                                this.pAccount = 0;
+                                this.rewardAccount += this.pAccount - a.getPrice() * this.itmQ.get(i);
+                            }
+
+                            a.setAvailQuant(a.getAvailQuant() - this.itmQ.get(i));
+
+                            float pr = (a.getPrice() * this.itmQ.get(i))*(float)((1/2)/100);
+                            for (Merchant k: Main.mer) {
+                                if(k.getmID() == a.getMerID()){
+                                    k.setContribution(k.getContribution()+pr);
+                                }
+                            }
+
+                            Main.account_balance += (a.getPrice() * this.itmQ.get(i))*(float)((1)/100);
+                            this.nofOrders += 1;
+
+                            this.rewardAccount += (this.nofOrders / 5)*10;
+                            break;
+                        }
+                    }
+                }
             }
 
             else if(query2 == 3){

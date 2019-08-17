@@ -30,7 +30,7 @@ public class Merchant {
     // possible use for interface
 
     public void addItem(String name, float price, int quantity, String category){
-        Items t = new Items(name,price,quantity,category);
+        Items t = new Items(name,price,quantity,category,this.mID);
         items.add(t);
         local_items.add(t);
         System.out.println(t);
@@ -209,7 +209,7 @@ public class Merchant {
         return contribution;
     }
 
-    public void setContribution(int contribution) {
+    public void setContribution(float contribution) {
         this.contribution = contribution;
     }
 
