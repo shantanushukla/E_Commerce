@@ -9,6 +9,10 @@ public class Main {
     static ArrayList<Merchant> mer = new ArrayList<>();
     static ArrayList<Customer> cus = new ArrayList<>();
 
+    public static void showMenu(funct b){
+        b.Menu();
+    }
+
     public static void main(String[] args) {
 
         // Declaring 5 Merchants
@@ -49,7 +53,8 @@ public class Main {
                 int s = sc.nextInt();
                 for (Merchant a: mer) {
                     if(a.getmID() == s){
-                        a.merchantMenu();
+                        //a.Menu();
+                        showMenu(a);
                     }
                 }
             }
@@ -62,13 +67,15 @@ public class Main {
                 int s = sc.nextInt();
                 for (Customer a: cus) {
                     if(a.getcID() == s){
-                        a.customerMenu();
+                        //a.Menu();
+                        showMenu(a);
                     }
                 }
             }
 
             else if(query == 3){
                 System.out.println("Enter M or C followed by user ID to see the details");
+                sc.nextLine();
                 String kn = sc.nextLine();
                 int mn = sc.nextInt();
 

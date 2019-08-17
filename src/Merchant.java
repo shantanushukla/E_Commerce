@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Merchant {
+public class Merchant implements funct {
 
     private static int setID;
     private final int mID;
@@ -60,6 +60,7 @@ public class Merchant {
         }
     }
 
+    @Override
     public void search(){
         for (Items a: items) {
             if(!cat.contains(a.getCategory())){
@@ -121,7 +122,11 @@ public class Merchant {
         }
     }
 
-    public void merchantMenu(){
+    public void ser(funct a){
+        a.search();
+    }
+
+    public void Menu(){
         System.out.println("Welcome "+this.name);
         int query1 = 0;
         while (query1 != 6){
@@ -148,6 +153,7 @@ public class Merchant {
                 int c = sc.nextInt();
 
                 System.out.println("Item Category");
+                sc.nextLine();
                 String d = sc.nextLine();
 
                 this.addItem(a,b,c,d);
@@ -170,7 +176,8 @@ public class Merchant {
 
             else if(query1 == 3){
                 System.out.println("Choose a category");
-                this.search();
+                //this.search();
+                ser(this);
             }
 
             else if(query1 == 4){

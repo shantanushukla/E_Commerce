@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Customer {
+public class Customer implements funct {
 
     private static int setID;
     private final int cID;
@@ -31,8 +31,13 @@ public class Customer {
         this.nofOrders = 0;
     }
 
+    @Override
     public  void search(){
-
+        for (Items a: items) {
+            if(!cat.contains(a.getCategory())){
+                cat.add(a.getCategory());
+            }
+        }
 
         for (String a: cat) {
             System.out.println(a);
@@ -93,7 +98,9 @@ public class Customer {
                     Main.account_balance += (a.getPrice() * d)*(float)((1)/100);
                     this.nofOrders += 1;
 
-                    this.rewardAccount += (this.nofOrders / 5)*10;
+                    if(this.nofOrders % 5 == 0) {
+                        this.rewardAccount += 10;
+                    }
 
                     orders.add( "Bought item "+a.getiName()+" quantity: "+d+" for Rs "+a.getPrice()+" from Merchant: "+name);
 
@@ -108,7 +115,11 @@ public class Customer {
         }
     }
 
-    public void customerMenu(){
+    public void ser(funct a){
+        a.search();
+    }
+
+    public void Menu(){
         System.out.println("Customer Menu");
         int query2 = 0;
 
@@ -123,7 +134,8 @@ public class Customer {
 
             if(query2 == 1){
                 System.out.println("Choose a category");
-                this.search();
+                //this.search();
+                ser(this);
             }
 
             else if(query2 == 2){
@@ -165,7 +177,9 @@ public class Customer {
                             Main.account_balance += (a.getPrice() * this.itmQ.get(i))*(float)((1)/100);
                             this.nofOrders += 1;
 
-                            this.rewardAccount += (this.nofOrders / 5)*10;
+                            if(this.nofOrders % 5 == 0) {
+                                this.rewardAccount += 10;
+                            }
 
                             orders.add( "Bought item "+a.getiName()+" quantity: "+this.itmQ.get(i)+" for Rs "+a.getPrice()+" from Merchant: "+namew);
                             break;
@@ -179,8 +193,12 @@ public class Customer {
             }
 
             else if(query2 == 4){
-                for (int i = orders.size()-1; i >= orders.size()-1-10; i++) {
+                int i = orders.size()-1;
+                int j = 10;
+                while(i>=0 && j>0) {
                     System.out.println(orders.get(i));
+                    i--;
+                    j--;
                 }
             }
         }
