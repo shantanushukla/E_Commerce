@@ -2,13 +2,13 @@ public class Items {
     static int setiUID;
     private final int iUID;
     private final String iName;
-    private float price;
+    private double price;
     private int availQuant;
     private String offer;
     private final String category;
     private int merID;
 
-    Items(String iName, float price, int availQuant, String category, int merID) {
+    Items(String iName, double price, int availQuant, String category, int merID) {
         setiUID += 1;
         this.iUID = setiUID;
         this.iName = iName;
@@ -27,7 +27,7 @@ public class Items {
         return iUID;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -39,7 +39,7 @@ public class Items {
         return category;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

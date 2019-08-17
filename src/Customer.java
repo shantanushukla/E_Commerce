@@ -7,8 +7,8 @@ public class Customer implements funct {
     private final int cID;
     private final String name;
     private final String address;
-    private float pAccount;
-    private float rewardAccount;
+    private double pAccount;
+    private double rewardAccount;
     private int nofOrders;
 
     private ArrayList<Integer> itmC = new ArrayList<>();
@@ -39,8 +39,10 @@ public class Customer implements funct {
             }
         }
 
+        int i = 1;
         for (String a: cat) {
-            System.out.println(a);
+            System.out.println(i+") "+a);
+            i++;
         }
 
         int cl = sc.nextInt();
@@ -75,7 +77,7 @@ public class Customer implements funct {
                         break;
                     }
 
-                    float temp = this.pAccount - a.getPrice() * d;
+                    double temp = this.pAccount - a.getPrice() * d;
                     if (temp >= 0) {
                         this.pAccount -= a.getPrice() * d;
                     } else {
@@ -87,7 +89,7 @@ public class Customer implements funct {
 
                     String name = "";
 
-                    float pr = (a.getPrice() * d)*(float)((1/2)/100);
+                    double pr =  (a.getPrice() * d)*(0.005);
                     for (Merchant k: Main.mer) {
                         if(k.getmID() == a.getMerID()){
                             k.setContribution(k.getContribution()+pr);
@@ -95,12 +97,14 @@ public class Customer implements funct {
                         }
                     }
 
-                    Main.account_balance += (a.getPrice() * d)*(float)((1)/100);
+                    Main.account_balance += (a.getPrice() * d)*(.01);
                     this.nofOrders += 1;
 
                     if(this.nofOrders % 5 == 0) {
                         this.rewardAccount += 10;
                     }
+
+                    System.out.println("Item Successfully bought");
 
                     orders.add( "Bought item "+a.getiName()+" quantity: "+d+" for Rs "+a.getPrice()+" from Merchant: "+name);
 
@@ -120,6 +124,7 @@ public class Customer implements funct {
     }
 
     public void Menu(){
+        System.out.println("Welcome "+this.name);
         System.out.println("Customer Menu");
         int query2 = 0;
 
@@ -155,7 +160,7 @@ public class Customer implements funct {
                                 break label;
                             }
 
-                            float temp = this.pAccount - a.getPrice() * this.itmQ.get(i);
+                            double temp = this.pAccount - a.getPrice() * this.itmQ.get(i);
                             if (temp >= 0) {
                                 this.pAccount -= a.getPrice() * this.itmQ.get(i);
                             } else {
@@ -166,7 +171,7 @@ public class Customer implements funct {
                             a.setAvailQuant(a.getAvailQuant() - this.itmQ.get(i));
                             String namew = "";
 
-                            float pr = (a.getPrice() * this.itmQ.get(i))*(float)((1/2)/100);
+                            double pr = (a.getPrice() * this.itmQ.get(i))*(0.005);
                             for (Merchant k: Main.mer) {
                                 if(k.getmID() == a.getMerID()){
                                     k.setContribution(k.getContribution()+pr);
@@ -174,12 +179,14 @@ public class Customer implements funct {
                                 }
                             }
 
-                            Main.account_balance += (a.getPrice() * this.itmQ.get(i))*(float)((1)/100);
+                            Main.account_balance += (a.getPrice() * this.itmQ.get(i))*(0.01);
                             this.nofOrders += 1;
 
                             if(this.nofOrders % 5 == 0) {
                                 this.rewardAccount += 10;
                             }
+
+                            System.out.println("Item Successfully bought");
 
                             orders.add( "Bought item "+a.getiName()+" quantity: "+this.itmQ.get(i)+" for Rs "+a.getPrice()+" from Merchant: "+namew);
                             break;
@@ -203,10 +210,6 @@ public class Customer implements funct {
             }
         }
 
-    }
-
-    public float getRewardAccount() {
-        return rewardAccount;
     }
 
     public int getcID() {

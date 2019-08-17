@@ -7,7 +7,7 @@ public class Merchant implements funct {
     private final int mID;
     private final String name;
     private final String address;
-    private float contribution;
+    private double contribution;
     private int rewardSlots;
 
     private static ArrayList<Items> items = new ArrayList<>();
@@ -29,14 +29,14 @@ public class Merchant implements funct {
 
     // possible use for interface
 
-    public void addItem(String name, float price, int quantity, String category){
+    public void addItem(String name, double price, int quantity, String category){
         Items t = new Items(name,price,quantity,category,this.mID);
         items.add(t);
         local_items.add(t);
         System.out.println(t);
     }
 
-    public void editItems(int id, float price, int quantity){
+    public void editItems(int id, double price, int quantity){
         boolean flag = false;
 
         for (Items a: local_items) {
@@ -147,7 +147,7 @@ public class Merchant implements funct {
                 String a = sc.nextLine();
 
                 System.out.println("Item Price");
-                float b = sc.nextFloat();
+                double b = sc.nextFloat();
 
                 System.out.println("Item Quantity");
                 int c = sc.nextInt();
@@ -167,7 +167,7 @@ public class Merchant implements funct {
                 int b = sc.nextInt();
                 System.out.println("Enter Edit Details");
                 System.out.println("Item Price:");
-                float c = sc.nextFloat();
+                double c = sc.nextFloat();
                 System.out.println("Item Quantity:");
                 int d = sc.nextInt();
 
@@ -212,11 +212,11 @@ public class Merchant implements funct {
         return rewardSlots;
     }
 
-    public float getContribution() {
+    public double getContribution() {
         return contribution;
     }
 
-    public void setContribution(float contribution) {
+    public void setContribution(double contribution) {
         this.contribution = contribution;
     }
 

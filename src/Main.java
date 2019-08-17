@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Discounts need implementation
+// Limit the addition of items by merchant
+
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
-    static float account_balance = 0;
+    static double account_balance = 0;
 
     static ArrayList<Merchant> mer = new ArrayList<>();
     static ArrayList<Customer> cus = new ArrayList<>();
@@ -97,7 +100,9 @@ public class Main {
             }
 
             else if(query == 4){
-                System.out.println("Account balance of the company is: "+ account_balance);
+                System.out.print("Account balance of the company is: ");
+                System.out.printf("%.4f",account_balance);
+                System.out.println();
             }
         }
     }
