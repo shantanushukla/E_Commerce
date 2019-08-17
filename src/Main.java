@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
+    static float account_balance = 0;
 
     public static void main(String[] args) {
 
@@ -27,10 +28,10 @@ public class Main {
 
         // Program Starts
 
-        float account_balance = 0;
+
         int query = 0;
 
-        while (query != 6){
+        while (query != 5){
             System.out.println("Welcome to Mercury");
             System.out.println("1) Enter as Merchant");
             System.out.println("2) Enter as Customer");
@@ -63,6 +64,32 @@ public class Main {
                         a.customerMenu();
                     }
                 }
+            }
+
+            else if(query == 3){
+                System.out.println("Enter M or C followed by user ID to see the details");
+                String kn = sc.nextLine();
+                int mn = sc.nextInt();
+
+                if(kn.equalsIgnoreCase("M")){
+                    for (Merchant b: mer) {
+                        if(b.getmID() == mn){
+                            System.out.println(b.getName()+" "+b.getAddress()+" "+b.getContribution());
+                        }
+                    }
+                }
+
+                else{
+                    for (Customer b: cus) {
+                        if(b.getcID() == mn){
+                            System.out.println(b.getName()+" "+b.getAddress()+" "+b.getNofOrders());
+                        }
+                    }
+                }
+            }
+
+            else if(query == 4){
+                System.out.println("Account balance of the company is: "+ account_balance);
             }
         }
     }

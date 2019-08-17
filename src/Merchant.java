@@ -7,6 +7,7 @@ public class Merchant {
     private final int mID;
     private final String name;
     private final String address;
+    private float contribution;
     private int rewardSlots;
 
     private static ArrayList<Items> items = new ArrayList<>();
@@ -23,6 +24,7 @@ public class Merchant {
         this.name = name;
         this.address = address;
         this.rewardSlots = 0;
+        this.contribution = 0;
     }
 
     // possible use for interface
@@ -201,5 +203,17 @@ public class Merchant {
 
     public int getRewardSlots() {
         return rewardSlots;
+    }
+
+    public float getContribution() {
+        return contribution;
+    }
+
+    public void setContribution(int contribution) {
+        this.contribution = contribution;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }

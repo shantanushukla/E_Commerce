@@ -9,6 +9,7 @@ public class Customer {
     private final String address;
     private float pAccount;
     private float rewardAccount;
+    private int nofOrders;
 
     // Functions
 
@@ -21,6 +22,7 @@ public class Customer {
         this.address = address;
         this.pAccount = 100;
         this.rewardAccount = 0;
+        this.nofOrders = 0;
     }
 
     public  void search(){
@@ -31,17 +33,17 @@ public class Customer {
             System.out.println(a);
         }
 
-        int c = sc.nextInt();
+        int cl = sc.nextInt();
 
         System.out.println("Choose item by code");
         for (Items a: items) {
-            if(a.getCategory().equalsIgnoreCase(cat.get(c-1))){
+            if(a.getCategory().equalsIgnoreCase(cat.get(cl-1))){
                 System.out.println(a);
             }
         }
 
         System.out.println("Enter item code");
-        c = sc.nextInt();
+        int c = sc.nextInt();
 
         System.out.println("Enter item quantity");
         int d = sc.nextInt();
@@ -71,11 +73,21 @@ public class Customer {
                         this.rewardAccount += this.pAccount - a.getPrice() * d;
                     }
 
-                    // Subtract the quantity from ArrayList as well
-
                     a.setAvailQuant(a.getAvailQuant() - d);
+
+                    float pr = (a.getPrice() * d)*(float)((1/2)/100);
+                    // Incomplete
+
+                    Main.account_balance += (a.getPrice() * d)*(float)((1)/100);
+                    this.nofOrders += 1;
+
+                    this.rewardAccount += (this.nofOrders / 5)*10;
                 }
             }
+        }
+
+        else if(y == 2){
+
         }
     }
 
@@ -102,7 +114,7 @@ public class Customer {
             }
 
             else if(query2 == 3){
-
+                System.out.println(this.rewardAccount);
             }
 
             else if(query2 == 4){
@@ -122,5 +134,13 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getNofOrders() {
+        return nofOrders;
     }
 }
