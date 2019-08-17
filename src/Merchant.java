@@ -31,6 +31,7 @@ public class Merchant {
         Items t = new Items(name,price,quantity,category);
         items.add(t);
         local_items.add(t);
+        System.out.println(t);
     }
 
     public void editItems(int id, float price, int quantity){
@@ -51,7 +52,6 @@ public class Merchant {
                 if(id == a.getiUID()){
                     a.setPrice(price);
                     a.setAvailQuant(quantity);
-                    System.out.println(a);
                     break;
                 }
             }
@@ -69,6 +69,7 @@ public class Merchant {
 
         for (String a:cat) {
             System.out.println(i+1 + ") " + a);
+            i++;
         }
 
         i = sc.nextInt();
@@ -82,6 +83,9 @@ public class Merchant {
     }
 
     public void Offer(){
+        for (Items a: local_items) {
+            System.out.println(a);
+        }
         int s = sc.nextInt();
 
         for (Items a: local_items) {
@@ -115,11 +119,87 @@ public class Merchant {
         }
     }
 
+    public void merchantMenu(){
+        System.out.println("Welcome "+this.name);
+        int query1 = 0;
+        while (query1 != 6){
+            System.out.println("Merchant Menu ");
+            System.out.println("1) Add item ");
+            System.out.println("2) Edit item ");
+            System.out.println("3) Search by category ");
+            System.out.println("4) Add offer ");
+            System.out.println("5) Rewards won ");
+            System.out.println("6) Exit ");
+            query1 = sc.nextInt();
+
+            if(query1 == 1){
+                System.out.println("Enter Item Details");
+
+                System.out.println("Item Name");
+                sc.nextLine();
+                String a = sc.nextLine();
+
+                System.out.println("Item Price");
+                float b = sc.nextFloat();
+
+                System.out.println("Item Quantity");
+                int c = sc.nextInt();
+
+                System.out.println("Item Category");
+                String d = sc.nextLine();
+
+                this.addItem(a,b,c,d);
+            }
+
+            else if(query1 == 2){
+                System.out.println("Choose Item by code");
+                for (Items a: local_items) {
+                    System.out.println(a);
+                }
+                int b = sc.nextInt();
+                System.out.println("Enter Edit Details");
+                System.out.println("Item Price:");
+                float c = sc.nextFloat();
+                System.out.println("Item Quantity:");
+                int d = sc.nextInt();
+
+                this.editItems(b,c,d);
+            }
+
+            else if(query1 == 3){
+                System.out.println("Choose a category");
+                this.search();
+            }
+
+            else if(query1 == 4){
+                System.out.println("Choose Item by code");
+                this.Offer();
+            }
+
+            else if(query1 == 5){
+                System.out.println("Rewards Won are: \n"+this.getRewardSlots());
+            }
+        }
+
+    }
+
     public static ArrayList<Items> getItems() {
         return items;
     }
 
     public static ArrayList<String> getCat() {
         return cat;
+    }
+
+    public int getmID() {
+        return mID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRewardSlots() {
+        return rewardSlots;
     }
 }
