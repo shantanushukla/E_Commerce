@@ -5,12 +5,13 @@ public class Main {
 
     static Scanner sc = new Scanner(System.in);
     static float account_balance = 0;
+
     static ArrayList<Merchant> mer = new ArrayList<>();
+    static ArrayList<Customer> cus = new ArrayList<>();
 
     public static void main(String[] args) {
 
         // Declaring 5 Merchants
-
 
         mer.add(new Merchant("jack","address1"));
         mer.add(new Merchant("john","address2"));
@@ -20,7 +21,6 @@ public class Main {
 
         // Declaring 5 Customers
 
-        ArrayList<Customer> cus = new ArrayList<>();
         cus.add(new Customer("ali","address1"));
         cus.add(new Customer("bruno","address2"));
         cus.add(new Customer("nobby","address3"));

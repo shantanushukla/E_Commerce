@@ -51,6 +51,10 @@ public class Items {
         return merID;
     }
 
+    public String getiName() {
+        return iName;
+    }
+
     @Override
     public String toString() {
         return  iUID + " " + iName + " " + price + " " + availQuant + " " + offer + " " + category;

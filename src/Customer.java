@@ -13,8 +13,9 @@ public class Customer {
 
     private ArrayList<Integer> itmC = new ArrayList<>();
     private ArrayList<Integer> itmQ = new ArrayList<>();
-    ArrayList<Items> items = Merchant.getItems();
-    ArrayList<String> cat = Merchant.getCat();
+    private ArrayList<Items> items = Merchant.getItems();
+    private ArrayList<String> cat = Merchant.getCat();
+    private ArrayList<String> orders = new ArrayList<>();
 
     // Functions
 
@@ -79,10 +80,13 @@ public class Customer {
 
                     a.setAvailQuant(a.getAvailQuant() - d);
 
+                    String name = "";
+
                     float pr = (a.getPrice() * d)*(float)((1/2)/100);
                     for (Merchant k: Main.mer) {
                         if(k.getmID() == a.getMerID()){
                             k.setContribution(k.getContribution()+pr);
+                            name = k.getName();
                         }
                     }
 
@@ -90,6 +94,8 @@ public class Customer {
                     this.nofOrders += 1;
 
                     this.rewardAccount += (this.nofOrders / 5)*10;
+
+                    orders.add( "Bought item "+a.getiName()+" quantity: "+d+" for Rs "+a.getPrice()+" from Merchant: "+name);
 
                     break;
                 }
@@ -146,11 +152,13 @@ public class Customer {
                             }
 
                             a.setAvailQuant(a.getAvailQuant() - this.itmQ.get(i));
+                            String namew = "";
 
                             float pr = (a.getPrice() * this.itmQ.get(i))*(float)((1/2)/100);
                             for (Merchant k: Main.mer) {
                                 if(k.getmID() == a.getMerID()){
                                     k.setContribution(k.getContribution()+pr);
+                                    namew = k.getName();
                                 }
                             }
 
@@ -158,6 +166,8 @@ public class Customer {
                             this.nofOrders += 1;
 
                             this.rewardAccount += (this.nofOrders / 5)*10;
+
+                            orders.add( "Bought item "+a.getiName()+" quantity: "+this.itmQ.get(i)+" for Rs "+a.getPrice()+" from Merchant: "+namew);
                             break;
                         }
                     }
@@ -169,7 +179,9 @@ public class Customer {
             }
 
             else if(query2 == 4){
-
+                for (int i = orders.size()-1; i >= orders.size()-1-10; i++) {
+                    System.out.println(orders.get(i));
+                }
             }
         }
 
