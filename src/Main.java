@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Discounts need implementation
-// Limit the addition of items by merchant
-
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
     static double account_balance = 0;
 
+    // Storing Customer and Merchant objects
+
     static ArrayList<Merchant> mer = new ArrayList<>();
     static ArrayList<Customer> cus = new ArrayList<>();
+
+    // Polymorphism for showing Menu
 
     public static void showMenu(funct b){
         b.Menu();
@@ -35,7 +36,6 @@ public class Main {
         cus.add(new Customer("aladeen","address5"));
 
         // Program Starts
-
 
         int query = 0;
 

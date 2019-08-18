@@ -8,6 +8,8 @@ public class Items {
     private final String category;
     private int merID;
 
+    // Functions Start
+
     Items(String iName, double price, int availQuant, String category, int merID) {
         setiUID += 1;
         this.iUID = setiUID;
@@ -15,9 +17,11 @@ public class Items {
         this.price = price;
         this.availQuant = availQuant;
         this.category = category;
-        this.offer = "";
+        this.offer = "None";
         this.merID = merID;
     }
+
+    // Getters and setters
 
     public void setOffer(String offer) {
         this.offer = offer;
@@ -54,6 +58,12 @@ public class Items {
     public String getiName() {
         return iName;
     }
+
+    public String getOffer() {
+        return offer;
+    }
+
+    // For printing (Special Function)
 
     @Override
     public String toString() {

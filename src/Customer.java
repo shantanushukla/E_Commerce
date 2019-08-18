@@ -17,7 +17,7 @@ public class Customer implements funct {
     private ArrayList<String> cat = Merchant.getCat();
     private ArrayList<String> orders = new ArrayList<>();
 
-    // Functions
+    // Functions Start
 
     Scanner sc = new Scanner(System.in);
 
@@ -30,6 +30,8 @@ public class Customer implements funct {
         this.rewardAccount = 0;
         this.nofOrders = 0;
     }
+
+    // Polymorphism
 
     @Override
     public  void search(){
@@ -106,7 +108,7 @@ public class Customer implements funct {
 
                     System.out.println("Item Successfully bought");
 
-                    orders.add( "Bought item "+a.getiName()+" quantity: "+d+" for Rs "+a.getPrice()+" from Merchant: "+name);
+                    orders.add( "Bought item "+a.getiName()+" quantity: "+d+" for Rs "+a.getPrice()*d+" from Merchant: "+name);
 
                     break;
                 }
@@ -119,9 +121,13 @@ public class Customer implements funct {
         }
     }
 
+    // Implementing function for polymorphism
+
     public void ser(funct a){
         a.search();
     }
+
+    // Starting of menu for Customer
 
     public void Menu(){
         System.out.println("Welcome "+this.name);
@@ -188,7 +194,7 @@ public class Customer implements funct {
 
                             System.out.println("Item Successfully bought");
 
-                            orders.add( "Bought item "+a.getiName()+" quantity: "+this.itmQ.get(i)+" for Rs "+a.getPrice()+" from Merchant: "+namew);
+                            orders.add( "Bought item "+a.getiName()+" quantity: "+this.itmQ.get(i)+" for Rs "+a.getPrice()*this.itmQ.get(i)+" from Merchant: "+namew);
                             break;
                         }
                     }
@@ -211,6 +217,8 @@ public class Customer implements funct {
         }
 
     }
+
+    // Getters and setters
 
     public int getcID() {
         return cID;

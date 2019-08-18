@@ -9,12 +9,15 @@ public class Merchant implements funct {
     private final String address;
     private double contribution;
     private int rewardSlots;
+    private int counter;
+
+    // Lists for storing Items (global) , local items (for each merchant) and cat for storing category
 
     private static ArrayList<Items> items = new ArrayList<>();
     private ArrayList<Items> local_items = new ArrayList<>();
     private static ArrayList<String> cat = new ArrayList<>();
 
-    // Functions
+    // Functions Start
 
     Scanner sc = new Scanner(System.in);
 
@@ -25,9 +28,10 @@ public class Merchant implements funct {
         this.address = address;
         this.rewardSlots = 0;
         this.contribution = 0;
+        this.counter = 0;
     }
 
-    // possible use for interface
+    // Adds items for merchant
 
     public void addItem(String name, double price, int quantity, String category){
         Items t = new Items(name,price,quantity,category,this.mID);
@@ -36,13 +40,19 @@ public class Merchant implements funct {
         System.out.println(t);
     }
 
+    // Edits the item price and quantity
+
     public void editItems(int id, double price, int quantity){
         boolean flag = false;
 
         for (Items a: local_items) {
             if(id == a.getiUID()){
-                a.setPrice(price);
-                a.setAvailQuant(quantity);
+                if(a.getOffer().equals("None")) {
+                    a.setPrice(price);
+                }else {
+                    a.setPrice(price*(0.75));
+                }
+                a.setAvailQuant(a.getAvailQuant()+quantity);
                 System.out.println(a);
                 flag = true;
                 break;
@@ -52,13 +62,19 @@ public class Merchant implements funct {
         if(flag){
             for (Items a: items) {
                 if(id == a.getiUID()){
-                    a.setPrice(price);
-                    a.setAvailQuant(quantity);
+                    if(a.getOffer().equals("None")) {
+                        a.setPrice(price);
+                    }else {
+                        a.setPrice(price*(0.75));
+                    }
+                    a.setAvailQuant(a.getAvailQuant()+quantity);
                     break;
                 }
             }
         }
     }
+
+    // Polymorphism Search function
 
     @Override
     public void search(){
@@ -85,6 +101,8 @@ public class Merchant implements funct {
         }
     }
 
+    // Adds offer and manipulates the price accordingly
+
     public void Offer(){
         for (Items a: local_items) {
             System.out.println(a);
@@ -99,10 +117,12 @@ public class Merchant implements funct {
 
                 if(n==1){
                     a.setOffer("buy one get one");
+                    //a.setPrice(a.getPrice()*(0.5));
                 }
 
                 else{
                     a.setOffer("25% off");
+                    //a.setPrice(a.getPrice()*(0.75));
                 }
 
                 System.out.println(a);
@@ -111,10 +131,12 @@ public class Merchant implements funct {
                     if(b.getiUID() == s){
                         if(n==1){
                             b.setOffer("buy one get one");
+                            b.setPrice(a.getPrice()*(0.5));
                         }
 
                         else{
                             b.setOffer("25% off");
+                            a.setPrice(a.getPrice()*(0.75));
                         }
                     }
                 }
@@ -122,9 +144,13 @@ public class Merchant implements funct {
         }
     }
 
+    // Polymorphism applying the search function
+
     public void ser(funct a){
         a.search();
     }
+
+    // Starting of menu for merchant
 
     public void Menu(){
         System.out.println("Welcome "+this.name);
@@ -140,23 +166,30 @@ public class Merchant implements funct {
             query1 = sc.nextInt();
 
             if(query1 == 1){
-                System.out.println("Enter Item Details");
+                if(counter <= this.rewardSlots+10) {
+                    System.out.println("Enter Item Details");
 
-                System.out.println("Item Name");
-                sc.nextLine();
-                String a = sc.nextLine();
+                    System.out.println("Item Name");
+                    sc.nextLine();
+                    String a = sc.nextLine();
 
-                System.out.println("Item Price");
-                double b = sc.nextFloat();
+                    System.out.println("Item Price");
+                    double b = sc.nextFloat();
 
-                System.out.println("Item Quantity");
-                int c = sc.nextInt();
+                    System.out.println("Item Quantity");
+                    int c = sc.nextInt();
 
-                System.out.println("Item Category");
-                sc.nextLine();
-                String d = sc.nextLine();
+                    System.out.println("Item Category");
+                    sc.nextLine();
+                    String d = sc.nextLine();
 
-                this.addItem(a,b,c,d);
+                    this.addItem(a, b, c, d);
+                    this.counter++;
+                }
+
+                else{
+                    System.out.println("Error: Cannot Add more Items");
+                }
             }
 
             else if(query1 == 2){
@@ -191,6 +224,8 @@ public class Merchant implements funct {
         }
 
     }
+
+    // Getters and setters
 
     public static ArrayList<Items> getItems() {
         return items;
